@@ -1,0 +1,155 @@
+$primary:#ff8200;
+$grey:#939393;
+$col_a:#507DAF;
+$col_bg:#f2f2f2;
+$font24:24px; //普通
+$font28:28px; //输入框
+$font30:30px; //次要标题
+$font32:32px; //重要标题
+$font34:34px; // btn
+
+@mixin mlr30{
+  margin-left: 30px;
+  margin-right: 30px;
+}
+@mixin plr30{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+/*2倍图 3倍图*/
+@mixin bg-image($url) {
+    background-image: url("./images/" + $url + "_2x.png");
+    background-repeat: no-repeat;
+
+}
+@mixin level-bg-image($url) {
+    background-image: url("../images/" + $url + "_2x.png");
+    background-repeat: no-repeat;
+
+}
+@mixin page-bg-image($url) {
+  background-image: url("../pages/images/" + $url + "_2x.png");
+  background-repeat: no-repeat;
+}
+$browser-default-font-size: 40px !default;
+@function pxToRem($px) {
+    //$px为需要转换的字号
+    @return $px / $browser-default-font-size * 1rem;
+}
+@mixin transForm($value...) {
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -ms-transform: $value;
+    -o-transform: $value;
+    transform: $value;
+}
+@mixin hasborTitle{
+  border-left: 8px solid $primary;
+  padding-left: 22px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 30px;
+  font-weight: 500;
+}
+// 背景图片地址和大小
+@mixin bis($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@mixin borderRadius($radius) {
+  -webkit-border-radius:  ($radius);
+  -moz-border-radius:  ($radius);
+  -ms-border-radius:  ($radius);
+  -o-border-radius:  ($radius);
+  border-radius:  ($radius);
+}
+//定位全屏
+@mixin allcover{
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+//定位上下左右居中
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin fixedcenter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+//定位上下居中
+@mixin ct {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//定位左右居中
+@mixin cl {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+//宽高
+@mixin wh($width, $height){
+  width: $width;
+  height: $height;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
+  font: #{$size}/#{$line-height} $family;
+}
+
+//字体大小，颜色
+@mixin sc($size, $color){
+  font-size: $size;
+  color: $color;
+}
+
+//flex 布局和 子元素 对其方式
+@mixin fj($type: space-between){
+  display: flex;
+  justify-content: $type;
+
+}
+@mixin flex($num){
+  -webkit-box-flex: $num;
+  -webkit-flex: $num;
+  flex: $num;
+}
+
+@mixin multi-line($val: 2){
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $val;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+@mixin single-line{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+@mixin arrow{
+  width: 16px;
+  height: 16px;
+  border: 1px solid #939393;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+@mixin bot_arrow{
+  @include arrow;
+  transform: rotate(135deg);
+}
+

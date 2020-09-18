@@ -1,0 +1,805 @@
+@charset "UTF-8";
+/*2倍图 3倍图*/
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+.sina_page {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  color: #333;
+  background: #f2f2f2;
+  font-size: 24px;
+  line-height: 1.5;
+}
+
+.sina_page.back_fff {
+  background: #fff;
+}
+
+.sina_page.haspagebot {
+  padding-bottom: 358px;
+}
+
+.sina_page .sina_cont {
+  padding: 0 30px;
+}
+
+.sina_page .sina_hasbg {
+  width: 100%;
+  position: relative;
+}
+
+.sina_page .sina_hasbg.join_bg {
+  background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBannerGive.png?v=1.0");
+}
+
+.sina_page .sina_hasbg.channel_nogive {
+  background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner1_2x.png?v=3.0");
+}
+
+.sina_page .sina_hasbg.valent {
+  background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/valent/DBTopbgValent.jpg?v=3.0");
+}
+
+.sina_page .sina_hasbg.noValent {
+  background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/valent/DBTopbgNoValent.jpg?v=3.0");
+}
+
+.sina_page .sina_hasbg.channel_default {
+  background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner2_2x.png?v=1.0");
+}
+
+.sina_page .sina_bot_ab {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.sina_page .sina_radius_bg {
+  background: #fff;
+  box-shadow: 0px 3px 12px 0px rgba(183, 182, 182, 0.3);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  padding: 40px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.sina_page .sina_radius_bg.hasbor {
+  box-shadow: none;
+  border: 1px solid #e6e6e6;
+}
+
+.sina_page .sina_radius_bg.hasback {
+  background: #F9F9FC;
+}
+
+.sina_page .sina_radius_bg.noboxshow {
+  box-shadow: none;
+}
+
+.sina_page .hasborTitle {
+  border-left: 6px solid #ff8200;
+  padding-left: 22px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.sina_page .normalTitle {
+  padding: 40px 30px 30px;
+  font-size: 32px;
+  background: transparent;
+}
+
+.sina_page .sina_input {
+  width: 100%;
+  padding: 24px 38px;
+  height: 88px;
+  font-size: 32px;
+  line-height: 40px;
+  background: white;
+  -webkit-border-radius: 44px;
+  -moz-border-radius: 44px;
+  -ms-border-radius: 44px;
+  -o-border-radius: 44px;
+  border-radius: 44px;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 32px;
+}
+
+.sina_page .sina_input.icon {
+  position: relative;
+  padding-right: 68px;
+}
+
+.sina_page .sina_input.icon.down::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 38px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  background: url("/static/images/sinaIconDown.png") no-repeat;
+  background-size: 30px 30px;
+}
+
+.sina_page .sina_input.icon .input_css {
+  text-align: left;
+  border: 0;
+  background: transparent;
+  width: 100%;
+}
+
+.sina_page .sina_input_normal {
+  position: relative;
+  padding: 32px 0;
+  line-height: 40px;
+  font-size: 28px;
+  border-bottom: 1px solid #e6e6e6;
+  box-sizing: content-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sina_page .sina_input_normal.has_icon {
+  padding-right: 40px;
+  background-size: 30px 30px;
+  background-position: center right;
+}
+
+.sina_page .sina_input_normal.has_icon .input_css {
+  text-align: left;
+  font-size: 28px;
+}
+
+.sina_page .sina_input_normal .label {
+  min-width: 80px;
+}
+
+.sina_page .sina_input_normal .input_css {
+  text-align: right;
+  border: 0;
+  flex: 1;
+}
+
+.sina_page .sina_input_normal.radius {
+  margin-top: 30px;
+  border-radius: 55px;
+  border: 1PX solid #e6e6e6;
+  padding-left: 40px;
+}
+
+.sina_page .sina_input_normal.radius .label {
+  min-width: 140px;
+}
+
+.sina_page .sina_input_normal.radius .input_css {
+  margin-right: 40px;
+}
+
+.sina_page .sina_textarea {
+  width: 100%;
+  position: relative;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1PX solid #E6E6E6;
+  font-size: 22px;
+}
+
+.sina_page .sina_textarea.disabled {
+  border-color: #fff;
+  background: #f5f5f9;
+}
+
+.sina_page .sina_textarea.disabled .counts {
+  color: #939393;
+}
+
+.sina_page .sina_textarea.hascount {
+  padding-bottom: 48px;
+}
+
+.sina_page .sina_textarea.hascount .counts {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  font-size: 20px;
+}
+
+.sina_page .sina_textarea textarea {
+  width: 100%;
+  height: 80px;
+  background: transparent;
+  border: 0;
+}
+
+.sina_page .sina_btn_icon {
+  border: 1px solid #ff8200;
+  color: #ff8200;
+  padding: 6px 26px;
+  background: white;
+  border-radius: 45px;
+  margin-left: 10px;
+}
+
+.sina_page .sina_btn_icon:first-child {
+  margin-left: 0;
+}
+
+.sina_page .plan-media-box_appmsg {
+  display: flex;
+  align-items: center;
+}
+
+.sina_page .plan-media-box_appmsg .plan-media-box__hd {
+  margin-right: 28px;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+}
+
+.sina_page .plan-media-box_appmsg .plan-media-box__hd .plan-media-box__thumb {
+  width: 100%;
+  max-height: 100%;
+  vertical-align: top;
+}
+
+.sina_page .plan-media-box_appmsg .plan-media-box__hd .plan-media-box__thumb img {
+  width: 100%;
+}
+
+.sina_page .plan-media-box_appmsg .plan-media-box__bd {
+  flex: 1;
+  min-width: 0;
+  font-size: 28px;
+}
+
+.sina_page .plan_hasback {
+  background: #fff;
+  margin-top: 20px;
+  padding-bottom: 48px;
+}
+
+.sina_page .plan_hasback .title_cont {
+  padding: 30px 0;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.sina_page .hasarrow {
+  padding-right: 24px;
+  position: relative;
+}
+
+.sina_page .hasarrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border: 1px solid #939393;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  transition: transform .3s;
+}
+
+.sina_page .hasarrow.min::after {
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  right: 30px;
+}
+
+.sina_page .hasarrow.col_fff::after {
+  border-color: #fff;
+}
+
+.sina_page .hasarrow.right::after {
+  transform: rotate(45deg);
+}
+
+.sina_page .hasarrow.bottom::after {
+  transform: rotate(135deg);
+}
+
+.sina_page .sina_radios .sina_radio {
+  line-height: 30px;
+  position: relative;
+  display: inline-block;
+  font-size: 28px;
+  padding: 20px 20px 20px 40px;
+}
+
+.sina_page .sina_radios .sina_radio.active::after {
+  background: #ff8200;
+}
+
+.sina_page .sina_radios .sina_radio:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #e6e6e6;
+  border-radius: 50%;
+}
+
+.sina_page .join_desc {
+  width: 100%;
+  margin-top: 24px;
+  padding-left: 40px;
+  position: relative;
+  color: #507DAF;
+  font-size: 22px;
+}
+
+.sina_page .join_desc .checkbox {
+  width: 26px;
+  height: 26px;
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 0px;
+  border: 1px solid #4ACE98;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.sina_page .join_desc .checkbox.checked {
+  background: #4ACE98 url("/static/images/sinaIconChecked3_2x.png") no-repeat center;
+  background-size: 18px 18px;
+}
+
+.sina_page .page_bot {
+  margin-top: 48px;
+  background: #fff;
+}
+
+.sina_page .page_bot .my_service {
+  height: 82px;
+  line-height: 82px;
+  color: #ff8200;
+  text-align: center;
+  border-top: 1px solid #e6e6e6;
+}
+
+.sina_page .page_bot .login_icon {
+  width: 100%;
+  height: 102px;
+  background-color: #fff;
+  background-position: center;
+  background-size: 108px 28px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.sina_page .img_100 {
+  width: 100%;
+}
+
+.sina_page .font32 {
+  font-size: 32px;
+}
+
+.sina_page .flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sina_page .flex1 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.sina_page .fr {
+  float: right;
+}
+
+.sina_page .textr {
+  text-align: right;
+}
+
+.sina_page .blod {
+  font-weight: 600;
+}
+
+.sina_page .public_cells {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sina_page .public_cells .public_cell {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  text-align: center;
+}
+
+.sina_page .public_cells .public_cell .medium {
+  width: 250px;
+}
+
+.sina_page .public_cells .public_cell .nums {
+  font-size: 52px;
+  line-height: 76px;
+  padding-bottom: 12px;
+}
+
+.sina_page .public_cells .public_cell .nums i {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.sina_page .public_cells .public_cell .txt {
+  color: #939393;
+}
+
+.sina_page .plan_types {
+  color: #939393;
+  background: #fff;
+  font-size: 28px;
+  display: flex;
+  text-align: center;
+}
+
+.sina_page .plan_types .plan_type {
+  position: relative;
+  padding: 30px 0;
+  flex: 1;
+}
+
+.sina_page .plan_types .plan_type:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16px;
+  width: 0px;
+  height: 4px;
+  background-color: transparent;
+  transition: all .3s;
+}
+
+.sina_page .plan_types .plan_type.active {
+  font-weight: bold;
+  color: #ff8200;
+}
+
+.sina_page .plan_types .plan_type.active:after {
+  width: 50px;
+  background-color: #ff8200;
+}
+
+.fadeIn-enter-active, .fadeIn-leave-active {
+  transition: opacity .3s;
+}
+
+.fadeIn-enter, .fadeIn-leave-active {
+  opacity: 0;
+}
+
+.translate-bottom-enter-active, .translate-bottom-leave-active {
+  transition: all 0.3s cubic-bezier(0.36, 0.66, 0.04, 1);
+}
+
+.translate-bottom-enter, .translate-bottom-leave-active {
+  bottom: -10% !important;
+  opacity: 0;
+}
+
+.sina_btn {
+  width: 100%;
+  height: 84px;
+  line-height: 84px;
+  font-size: 34px;
+  border: 1px solid #e6e6e6;
+  text-align: center;
+}
+
+.sina_btn.wauto {
+  width: auto;
+  min-width: 220px;
+  padding: 0 20px;
+  height: 68px;
+  line-height: 68px;
+  font-size: 28px;
+  display: inline-block;
+}
+
+.sina_btn.radius {
+  border-radius: 42px;
+}
+
+.sina_btn.radius.primary {
+  background: linear-gradient(270deg, #ffbc33 0%, #ff8200 100%);
+  color: #fff;
+  border: 0;
+}
+
+.sina_btn.radius.grey {
+  background-image: linear-gradient(90deg, #857E77 0%, #B3ADA0 100%);
+  color: #fff;
+  border: 0;
+}
+
+.sina_btn.radius.default {
+  background: #fff;
+  color: #939393;
+  border-color: #d0d0d0;
+}
+
+.sina_btn.radius.line.primary {
+  border: 1PX solid #ff8200;
+  background: #fff;
+  color: #ff8200;
+}
+
+.sina_btn.radius.line.white {
+  border-color: white;
+  background: #ff8200;
+  color: white;
+  box-shadow: 0px 7px 24px 0px rgba(223, 61, 1, 0.5);
+}
+
+.sina_btn.medium {
+  width: 220px;
+  height: 68px;
+  border-radius: 34px;
+  line-height: 68px;
+  font-size: 28px;
+  display: inline-block;
+}
+
+.sina_btn.max {
+  height: 100px;
+  line-height: 100px;
+  border-radius: 50px;
+}
+
+.check_box {
+  color: #939393;
+  font-size: 22px;
+  position: relative;
+  margin: 0 auto;
+  padding-left: 40px;
+}
+
+.check_box::before, .check_box.checked::before {
+  content: '';
+  width: 26px;
+  height: 26px;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 2px;
+  border: 1px solid #979797;
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.check_box.checked::before {
+  background-size: 18px 18px;
+  background-position: center;
+  background-image: url("/static/images/sinaIconChecked1_2x.png");
+  background-color: #fff;
+  background-repeat: no-repeat;
+}
+
+.check_box.bg1::before {
+  border: 1px solid #fff;
+}
+
+.check_box.bg2.checked::before {
+  background-image: url("/static/images/sinaIconChecked2_2x.png");
+  background-color: #fff;
+}
+
+.check_box.bg3.checked::before {
+  background-image: url("/static/images/sinaIconChecked4_2x.png");
+}
+
+.check_box.primary::before {
+  border-color: #4ACE98;
+}
+
+.check_box.primary.checked::before {
+  background-color: #4ACE98;
+}
+
+.sinaalertbox .help_type {
+  display: flex;
+  height: 64px;
+  font-size: 24px;
+  color: #fff;
+  line-height: 64px;
+  margin-bottom: 36px;
+  margin-top: 40px;
+}
+
+.sinaalertbox .help_type:first-child {
+  margin-top: 0;
+}
+
+.sinaalertbox .help_type .help_type_name {
+  padding: 0 30px;
+  background: #ff8200;
+  border-radius: 32px 0px 0px 32px;
+  margin-right: 10px;
+}
+
+.sinaalertbox .help_type .help_type_desc {
+  flex: 1;
+  padding: 0 30px;
+  background: #ffb86f;
+  border-radius: 0 32px 32px 0px;
+}
+
+.sinaalertbox .help_type_info {
+  color: #FF8200;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.toast-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9996;
+}
+
+.col_a {
+  color: #507DAF;
+  cursor: pointer;
+}
+
+.col_primary {
+  color: #ff8200;
+}
+
+.col_grey {
+  color: #939393;
+}
+
+.col_ffb93c {
+  color: #FFB93C;
+}
+
+.col_red {
+  color: #c82a29;
+}
+
+.alert_note_info {
+  margin-top: 26px;
+  padding: 24px 30px;
+  font-size: 22px;
+  background: #f5f5f9;
+  border-radius: 25px;
+}
+
+.exit_redPacketBg {
+  width: 470px;
+  height: 250px;
+  background: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/exitRedpacketbg1.png?v=2") no-repeat;
+  background-size: 470px 250px;
+  color: #FFFCE6;
+  font-size: 26px;
+  line-height: 136px;
+  padding-top: 24px;
+  text-align: center;
+}
+
+.exit_redPacketBg .money {
+  font-size: 86px;
+}
+
+.exit_redPacketBg.bg2 {
+  background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/exitRedpacketbg2.png?v=2");
+}
+
+.exit-infos {
+  background: #fff;
+  padding: 47px 36px 0 40px;
+  font-size: 26px;
+}
+
+.exit-infos .exit_txt_tips {
+  line-height: 40px;
+}
+
+.exit-infos .exit_txt_tips i {
+  background: #ff8200;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 22px;
+  line-height: 40px;
+  display: inline-block;
+  font-style: normal;
+  padding: 0 12px;
+}
+
+.exit-infos .exit_now {
+  padding: 24px 0 44px;
+}
+
+.exit-infos .exit_cells {
+  font-size: 28px;
+  padding: 0 20px;
+  font-weight: bold;
+}
+
+.exit-infos .exit_cells .exit_cell {
+  padding-left: 52px;
+  background: url("/static/images/exitIcon_2x.png") no-repeat left center;
+  background-size: 34px 34px;
+  margin-top: 18px;
+  line-height: 40px;
+}
+
+.exit-infos .exit_cells .exit_cell:first-child {
+  margin-top: 0;
+}
+
+.exit-infos .footer_btns {
+  padding: 70px 10px 86px;
+  background: #fff;
+}
+
+.exit-infos .footer_btns .sina_btn {
+  margin-right: 30px;
+}
+
+.alert_ul {
+  padding-top: 30px;
+}
+
+.alert_ul .alert_li {
+  padding-left: 36px;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.alert_ul .alert_li::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  background: #ff8200;
+}
+
+.alert_ul .alert_li:last-child {
+  padding-bottom: 0;
+}
+
+.alert_ul.edit_amnt {
+  font-size: 22px;
+}
+
+.alert_ul.edit_amnt .alert_li::before {
+  background-color: #B7B6B6;
+  border-radius: 50%;
+}
