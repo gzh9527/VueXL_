@@ -1,5 +1,5 @@
 
-export default  [
+export default [
   {
     path: '/weibo/userauth',
     name: 'userAuth',
@@ -16,7 +16,10 @@ export default  [
       title: '加入新浪互助',
       keepAlive: false,
     },
-    component: (resolve) => require(['@/pages/insure-join.vue'], resolve)
+    // component: (resolve) => require(['@/pages/thanksDay.vue'], resolve) //感恩节加入渠道页面
+    // component: (resolve) => require(['@/pages/insure-join.vue'], resolve)
+    // component: (resolve) => require(['@/pages/newYearJoin.vue'], resolve)//新年加入
+    component: (resolve) => require(['@/pages/activeMenJoin.vue'], resolve) //女性加入赠险
   },
   {
     path: '/weibo/insure-write',
@@ -64,15 +67,6 @@ export default  [
     component: (resolve) => require(['@/pages/planDetail.vue'], resolve)
   },
   {
-    path: '/weibo/insure-paySuc',
-    name: 'paySuc',
-    meta: {
-      title: '加入计划成功',
-      keepAlive: false,
-    },
-    component: (resolve) => require(['@/pages/joinPlanSuccess/joinPlanSuccess.vue'], resolve)
-  },
-  {
     path: '/weibo/insure-active',
     name: 'insure-active',
     meta: {
@@ -89,6 +83,7 @@ export default  [
       keepAlive: false,
     },
     component: (resolve) => require(['@/pages/planAddUser.vue'], resolve)
+    // component: (resolve) => require(['@/pages/newYearAddFamily.vue'], resolve)
   },
   {
     path: '/weibo/activity/:year/:id',
@@ -385,7 +380,7 @@ export default  [
       title: '送你一份互助保障',
       keepAlive: false,
     },
-    component: (resolve) => require(['@/pages/activity/activityValent.vue'], resolve)
+    component: (resolve) => require(['@/pages/activity/newYearAddFriends.vue'], resolve)
   },
   {
     path: '/weibo/amnt-edit',
@@ -395,6 +390,15 @@ export default  [
       keepAlive: false,
     },
     component: (resolve) => require(['@/pages/plan/editAmnt.vue'], resolve)
+  },
+  {
+    path: '/weibo/moreQuestion',
+    name: 'moreQuestion',
+    meta: {
+      title: '更多问题',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/moreQuestion.vue'], resolve)
   },
   {
     path: '/weibo/amnt-list',
@@ -430,14 +434,167 @@ export default  [
     },
     component: (resolve) => require(['@/pages/thankYouLetter/sinaPage.vue'], resolve)
   },
+  //加入成功页
   {
-    path: '/weibo/join_plansuccess',
+    path: '/weibo/insure-paySuc',
+    name: 'paySuc',
     meta: {
       title: '加入计划成功',
       keepAlive: false,
     },
-    component: (resolve) => require(['@/pages/joinPlanSuccess/joinPlanSuccess.vue'], resolve)
+    component: (resolve) => require(['@/pages/paySuc.vue'], resolve)
   },
-  //{path: '*', redirect: '/weibo/browser-page'}
-  {path: '*', redirect: '/weibo/insure-join'}
+  //加入失败页
+  {
+    path: '/weibo/join_planerror',
+    meta: {
+      title: '加入计划失败',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/joinPlanSuccess/joinPlanError.vue'], resolve)
+  },
+  //空白页面用于 加入流程扣款成功与失败的 下一步跳转
+  {
+    path: '/weibo/pay-blank',
+    meta: {
+      title: '跳转中',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/PayBlank.vue'], resolve)
+  },
+  //3元加入版本2
+  //空白页面用于 加入流程扣款成功与失败的 下一步跳转
+  {
+    path: '/weibo/insure-write2',
+    meta: {
+      title: '填写信息',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/insure-write2.vue'], resolve)
+  },
+  //壁虎商城
+  {
+    path: '/weibo/mall-list',
+    meta: {
+      title: '壁虎甄品商城',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/bihuMall/mallList.vue'], resolve)
+  },
+  {
+    path: '/weibo/mall-detail',
+    meta: {
+      title: '壁虎甄品商城',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/bihuMall/mallDetail.vue'], resolve)
+  },
+  {
+    path: '/weibo/xtjIndex',
+    meta: {
+      title: '保险避坑课',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/xtjPage/xtjIndex.vue'], resolve)
+  },
+  {
+    path: '/weibo/xtjSuc',
+    meta: {
+      title: '预约成功',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/xtjPage/xtjSuc.vue'], resolve)
+  },
+  //新浪借钱渠道加入互助
+  {
+    path: '/weibo/sinaBorrowMoney/borrowMoneyJoin',
+    meta: {
+      title: '兑换互助权益',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/sinaBorrowMoney/borrowMoneyJoin.vue'], resolve)
+  },
+  {
+    path: '/weibo/sinaBorrowMoney/borrowMoneyWrite',
+    meta: {
+      title: '加入新浪互助',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/sinaBorrowMoney/borrowMoneyWrite.vue'], resolve)
+  },
+  //加入成功ver2
+  {
+    path: '/weibo/joinPlanSuccess/joinPlanSuc',
+    meta: {
+      title: '加入计划成功',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/joinPlanSuccess/joinPlanSuc.vue'], resolve)
+  },
+  //调查问卷
+  {
+    path: '/weibo/questionnaire',
+    meta: {
+      title: '用户调研问卷',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/questionnaire.vue'], resolve)
+  },
+  //调查问卷成功页
+  {
+    path: '/weibo/joinPlanSuccess/questSuc',
+    meta: {
+      title: '用户调研问卷',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/joinPlanSuccess/questSuc.vue'], resolve)
+  },
+  {
+    path: '/weibo/noticeList',
+    name: 'noticeList',
+    meta: {
+      title: '消息',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/noticeList.vue'], resolve)
+  },
+  {
+    path: '/weibo/newYearJoin',
+    name: 'newYearJoin',
+    meta: {
+      title: '加入新浪互助',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/newYearJoin.vue'], resolve)
+  },
+  {
+    path: '/weibo/newYearFriends',
+    name: 'newYearFriends',
+    meta: {
+      title: '邀请好友',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/activity/activityValent.vue'], resolve)
+    // component: (resolve) => require(['@/pages/activity/newYearAddFriends.vue'], resolve)
+
+  },
+  {
+    path: '/weibo/newYearAddFamily',
+    name: 'newYearFriends',
+    meta: {
+      title: '添加家人',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/newYearAddFamily.vue'], resolve)
+  },
+  {
+    path: '/weibo/activeMenJoin',
+    name: 'newYearJoin',
+    meta: {
+      title: '加入新浪互助',
+      keepAlive: false,
+    },
+    component: (resolve) => require(['@/pages/activeMenJoin.vue'], resolve)
+  },
+  { path: '*', redirect: '/weibo/insure-join' }
 ];

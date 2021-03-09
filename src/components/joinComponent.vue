@@ -292,7 +292,8 @@
           relation: "00", //关系
           plan_code: this.planCode,
           work_type:this.workTypeIndex*1+1,
-          channel: localStorage.getItem('channel') || '810000'
+          channel: localStorage.getItem('channel') || '810000',
+          amount: 0,
         };
         if(this.planCode =='XL001'){
           delete  params.work_type;

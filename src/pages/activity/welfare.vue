@@ -1,12 +1,15 @@
 ﻿<template>
   <div class="sina_page">
     <div class="welfare_bg">
-      <img src="http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/valent/activityWelfareBg_2x.png">
-      <img src="./images/activeWelfareIcon.png" class="walfare_icon" @click="gotoshare">
+      <!-- <img src="http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/valent/activityWelfareBg1_2x.png"> -->
+      <img src="http://bihu-sina-project.oss-cn-beijing.aliyuncs.com/imgs/biejing%20%402x.png" alt="">
+<!--      <img src="./images/activeWelfareIcon.png" class="walfare_icon" @click="gotoshare">-->
+<div class="btn" @click="sumbitEvt">
+  <img src="http://bihu-sina-project.oss-cn-beijing.aliyuncs.com/imgs/button%402x.png" alt="">
+</div>
       <div class="welfare_btn one" @click="getTask(1)"></div>
       <div class="welfare_btn two" @click="getTask(2)"></div>
       <div class="welfare_btn three"@click="getTask(3)"></div>
-      <div class="welfare_btn four" @click="gotomore"></div>
     </div>
     <sina-alert v-if="alertShow" alertTitle="领取任务"
                 isComponents="true"
@@ -66,8 +69,9 @@
     },
     methods: {
       getTask(id){
-        this.taskId = id;
-        this.alertShow = true;
+        // this.taskId = id;
+        // this.alertShow = true;
+        window.location.href = 'https://pay.sc.weibo.com/center/mobile/task/index?source=huzhu';
       },
       sumbitEvt(){
         window.location.href = 'https://pay.sc.weibo.com/center/mobile/task/index?source=huzhu';
@@ -85,8 +89,7 @@
 
 <style lang="scss" scoped>
   .sina_page {
-    background:  #f48aa2;
-
+    background:  #ffd4a2;
     .welfare_bg {
       position: relative;
       .walfare_icon {
@@ -97,23 +100,21 @@
         height: 96px;
       }
       .welfare_btn {
-        width: 150px;
-        height: 76px;
+        width: 156px;
+        height: 62px;
         position: absolute;
-        right: 48px;
+        right: 74px;
         &.one {
-          top: 670px;
+          top: 818px;
         }
 
         &.two {
-          top: 830px;
-          right: 60px;
+          top: 1032px;
         }
 
         &.three {
-          width: 170px;
-          top: 1004px;
-          right: 68px;
+          top: 1244px;
+
         }
         &.four {
           width: 656px;
@@ -122,7 +123,18 @@
           right: 22px;
         }
       }
-
+      .btn{
+        width: 576px;
+        height: 116px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 63%;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
     .alert_info{
       padding: 0 25px;

@@ -2,7 +2,9 @@ const checkPhone = (phone) => {
   return /^1\d{10}$/.test(phone);
 };
 const isChn = (str) => {
-  return /^[\u4e00-\u9fa5 ]{2,6}$/.test(str);
+  // return /^[\u4e00-\u9fa5 ]{2,6}$/.test(str);
+  //[\u4e00-\u9fa5.·\u36c3\u4DAE]
+  return /^[\u4e00-\u9fa5.•·\u36c3\u4DAE]{2,20}$/.test(str);
 };
 
 const isEmail = (mail) => {

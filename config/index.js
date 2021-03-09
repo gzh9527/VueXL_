@@ -35,7 +35,15 @@ module.exports = {
         pathRewrite: {
           '^/prodapi': ''
         }
-      }
+      },
+      '/mallapi': {
+        target: 'https://mall.ibehoo.com/api/',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/mallapi': ''
+        }
+      },
     },
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST

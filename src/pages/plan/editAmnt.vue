@@ -33,7 +33,7 @@
     data() {
       return {
         planCode: 'XL001',
-        customerNo: '',
+        id: '',
         alertShow: true,
         planAmnt: 0,
         updateAmnt: 0,
@@ -42,22 +42,20 @@
     created() {
       // this.actionCount('pv');
       this.planCode = this.$route.query.planCode || 'XL001';
-      this.customerNo = this.$route.query.customerNo;
-      if (this.customerNo) {
+      this.id = this.$route.query.id;
+      if (this.id) {
         if (!sessionStorage.getItem('myPlanInfo')) {
           this.getPlanList();
         } else {
           let myPlanInfo = JSON.parse(sessionStorage.getItem('myPlanInfo'));
           myPlanInfo.dataList.forEach(item => {
-            if (item.insured.customerno == this.customerNo) {
-              item.plans.forEach(plan => {
-                if (plan.plan_code == this.planCode) {
-                  this.planAmnt = plan.amnt;
-                  this.updateAmnt = plan.amnt;
-                  return;
-                }
-              })
-            }
+            item.plans.forEach(plan => {
+              if (plan.son_policy_no == this.id) {
+                this.planAmnt = plan.amnt;
+                this.updateAmnt = plan.amnt;
+                return;
+              }
+            })
           });
         }
       } else {
@@ -71,21 +69,19 @@
           if (ret.code == 0) {
             let myPlanInfo = ret.data.policy_list;
             myPlanInfo.forEach(item => {
-              if (item.insured.customerno == this.customerNo) {
-                item.plans.forEach(plan => {
-                  if (plan.plan_code == this.planCode) {
-                    this.planAmnt = plan.amnt;
-                    this.updateAmnt = plan.amnt;
-                    return;
-                  }
-                })
-              }
+              item.plans.forEach(plan => {
+                if (plan.son_policy_no == this.id) {
+                  this.planAmnt = plan.amnt;
+                  this.updateAmnt = plan.amnt;
+                  return;
+                }
+              })
             });
           }
         })
       },
       updateVal(type) {
-        let val = this.updateAmnt;
+        let val = this.updateAmnt*1;
         if (type == 'sub') {
           val -= 2.5;
           val < 5 ? val = 5 : null;
@@ -100,11 +96,19 @@
           this.$toast('额度没有修改，请修改额度');
           return;
         }
+        let dateTime = new Date();
+        let day = dateTime.getDate();
+        if (day < 14) {
+          dateTime = dateTime.setDate(dateTime.getDate() + (14 - day * 1));
+        } else if (day > 14 && day < 28) {
+          dateTime = dateTime.setDate(dateTime.getDate() + (28 - day * 1));
+        }
+        let now = this.dateFormat('YYYY年mm月dd日', new Date(dateTime));
         this.$sinaAlert({
           title: '调整额度',        //提醒文字
           onlyHasTitle: false,
           desc: `<div class="alert_ul edit_amnt">
-                  <p class="alert_li">分摊费用从<span class="col_primary">2020年09月14日</span>起按新的互助金额度进行分摊 </p>
+                  <p class="alert_li">分摊费用从<span class="col_primary">${now}</span>起按新的互助金额度进行分摊 </p>
                   <p class="alert_li">降额立即生效，升额部分需重新计算180天观察期</p>
                 </div>`,
           cancelCallback: this.sumbitEdit,
@@ -113,31 +117,55 @@
           cancelButtonText: '立即调额',
         })
       },
+      dateFormat(fmt, date) {
+        let ret;
+        let opt = {
+          "Y+": date.getFullYear().toString(),        // 年
+          "m+": (date.getMonth() + 1).toString(),     // 月
+          "d+": date.getDate().toString(),            // 日
+          "H+": date.getHours().toString(),           // 时
+          "M+": date.getMinutes().toString(),         // 分
+          "S+": date.getSeconds().toString()          // 秒
+          // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        };
+        for (let k in opt) {
+          ret = new RegExp("(" + k + ")").exec(fmt);
+          if (ret) {
+            fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+          }
+        }
+        return fmt;
+      },
       sumbitEdit() {
         let op_type = '';
+        let value = 0;
         if (this.updateAmnt > this.planAmnt) {
           op_type = 'up';
+          value =(this.updateAmnt-this.planAmnt) * 10000;
         } else {
           op_type = 'down';
+          value =(this.planAmnt-this.updateAmnt) * 10000;
         }
+        console.log(value)
         this.$post(Api.adjustCoverage, {
-          "plan_code": this.planCode,
-          "customerno": this.customerNo,
-          "amnt": this.updateAmnt * 10000,
+          "son_policy_no": this.id,
+          "amnt": value,
           "op_type": op_type
         }).then(ret => {
           if (ret.code == 0) {
+            sessionStorage.removeItem('myPlanInfo');
             this.$router.push({
               path:'/weibo/amnt-suc',
               query:this.$route.query
             })
+
           } else {
             this.$toast(ret.msg || "请求超时，请刷新重试");
           }
         })
       },
       checkDetail() {
-        this.$router.push('/weibo/amnt-list')
+        this.$router.push({path: '/weibo/amnt-list', query: this.$route.query})
       }
     }
   }
@@ -243,6 +271,7 @@
       color: $primary;
       font-size: 26px;
       text-align: center;
+      background: #fff;
     }
   }
 </style>

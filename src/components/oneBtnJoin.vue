@@ -80,7 +80,8 @@ import Api from '../utils/apiConfig'
           relation: this.addPerson.relatype, //关系
           mobile: this.addPerson.mobile || '' ,
           plan_code: this.addPerson.notHaveCode,
-          channel: channel
+          channel: channel,
+          amount: 0,
         }).then(ret => {
           if (ret.code === 0) {
              if(ret.data.state==0){

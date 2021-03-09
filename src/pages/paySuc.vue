@@ -16,8 +16,14 @@
 <!--        </div>-->
         <div class="sina_btn radius primary line cenbtn" @click="jumpUrl('plan')" v-if="isActive">查看我的计划</div>
         <router-link to="/weibo/insure-active?planCode=XL001" class="href" v-else>立即激活</router-link>
-        <div class="myAd" v-if="isActive" @click="jumpUrl('add')">
-          <img src="http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBPaysucAd.png">
+        <div class="myAd" v-if="isActive" >
+          <finance-login :financeMobile="financeMobile"
+                         v-if="financeMobile"
+                         :subSource="subSource"
+          ></finance-login>
+          <img src="http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBPaysucAd.png"
+               v-else
+               @click="jumpUrl('add')">
         </div>
 
       </div>
@@ -27,10 +33,12 @@
 
 <script>
   import Api from "../utils/apiConfig";
-  import myAd from '../components/sinaAd'
+  import myAd from '../components/sinaAd';
+  import financeLogin from '../components/financeLogin'
   export default {
     name: "paySuc",
     components: {
+      financeLogin,
       myAd
     },
     data() {
@@ -45,6 +53,10 @@
         fyPlanState:null, // 肺炎计划状态
         fyPlanInfo:null, // 肺炎计划信息
         activeInfoShow:false, //钱包福利提示显示与否
+        bannerShow: false,
+        subSource: 61339711,
+        financeMobile: null, // 借钱接口返回--用户手机号
+        financeShow: false,
       }
     },
     watch:{
@@ -52,15 +64,40 @@
         if(value&&localStorage.getItem('_sendNotice')){
           this.sendSinaEvent();
         }
+        // 判断是否是借钱老用户
+        // this.bannerShow = true;   //删除判断时需显示
+        this.checkFinanceReceive();
+
       }
     },
     computed: {},
     mounted() {
-      sessionStorage.removeItem('myPlanInfo');
-      sessionStorage.removeItem('_planisOver');
-      sessionStorage.removeItem('_planState');
+      sessionStorage.removeItem("myPlanInfo");
+      sessionStorage.removeItem("_planisOver");
+      sessionStorage.removeItem("_planState");
+      let channel = window.localStorage.getItem("channel");
+      // 成功页||成功挽留页埋点
+      if (
+        localStorage.getItem("_AgainActive") ||
+        localStorage.getItem("_ActiveChannel")
+      ) {
+        //借钱渠道
+        if (channel == "55001") {
+          this.actionCount("borrowPv1");
+        } else {
+          //本人加入放弃支付授权再次激活 埋点
+          this.actionCount("pv1");
+        }
+      } else {
+        //借钱渠道
+        if (channel == "55001") {
+          this.actionCount("borrowPv");
+        } else {
+          this.actionCount("pv");
+        }
+      }
       history.pushState(null, null, document.URL);
-      window.addEventListener('popstate', function () {
+      window.addEventListener("popstate", function () {
         history.pushState(null, null, document.URL);
       });
       if(this.$route.query.type){
@@ -76,14 +113,8 @@
           if (ret.code === 0) {
             this.fyPlanState =ret.data.plan_list_state && ret.data.plan_list_state['XL003'];
             if (ret.data.plan_list_state && (ret.data.plan_list_state['XL001'] == 'activated' || ret.data.plan_list_state['XL002'] == 'activated')) {
-
+              this.isShow = true;
               this.addFYPlan();
-              if(localStorage.getItem('_AgainActive') || localStorage.getItem('_ActiveChannel')){
-                //本人加入放弃支付授权再次激活
-                this.actionCount('pv1');
-              }else{
-                this.actionCount('pv');
-              }
             } else {
               this.sinaActive();
             }
@@ -94,19 +125,12 @@
 
       },
       sinaActive() {
-        let tranNo = this.$route.query.tran_no;
-        if (!tranNo) {
-          this.$toast("请求失败，请刷新重试");
+        this.$post(Api.activationPolicy, {tran_no: 'aaa'}).then(ret => {
           this.isShow = true;
-          this.isActive = false;
-          return;
-        }
-        this.$post(Api.activationPolicy, {tran_no: tranNo}).then(ret => {
           if (ret.code === 0) {
             this.addFYPlan();
-            this.actionCount('pv');
+            this.isActive = true;
           } else {
-            this.isShow = true;
             this.isActive = false;
             this.$toast(ret.msg || "请求失败，请刷新重试");
           }
@@ -121,11 +145,10 @@
           return;
         }
         this.$post(Api.paySign, {tran_no: tranNo}).then(ret => {
+          this.isShow = true;
           if (ret.code === 0) {
-            this.isShow = true;
             this.isActive = true;
           } else {
-            this.isShow = true;
             this.isActive = false;
             this.$toast(ret.msg || "请求失败，请刷新重试");
           }
@@ -168,7 +191,8 @@
                   relation: '00', //关系
                   mobile: item.mobile || '' ,
                   plan_code: 'XL003',
-                  channel: '810028'
+                  channel: '810028',
+                  amount: 0,
                 }).then(ret => {
                   this.getPlanList();
                 })
@@ -203,6 +227,18 @@
         //   }
         // })
       },
+      // 判断是否是借钱老用户
+      checkFinanceReceive(){
+        setTimeout(() => {
+          this.bannerShow = true;
+        }, 2000);
+        this.$post(Api.get_finance_receive, {subSource: this.subSource}).then(ret => {
+          this.bannerShow = true;
+          if (ret.code == 0 && ret.msg.mobile) {
+            this.financeMobile = ret.msg.mobile;
+          }
+        })
+      }
     }
   }
 </script>

@@ -34,8 +34,11 @@
           </template>
         </div>
         <div class="plan_icons" v-if="checkTabIndex==1">
-          <div class="plan_icon medium" :class="{active:searchInfo.year =='2020'}" @click="checkedIcon('2020')">2020</div>
-          <div class="plan_icon medium" :class="{active:searchInfo.year =='2019'}" @click="checkedIcon('2019')">2019</div>
+          <template v-for="year of years">
+            <div class="plan_icon medium" :class="{active:searchInfo.year == year}" @click="checkedIcon(year)">
+              {{year}}
+            </div>
+          </template>
         </div>
         <div class="plan_icons" v-if="checkTabIndex==2">
           <div class="plan_icon" :class="{active:searchInfo.planName =='大病互助计划'}"  @click="checkedIcon('大病互助计划')">大病互助计划</div>
@@ -101,19 +104,26 @@
         checkTabShow:false,
         checkTabIndex:0,
         searchInfo:{
-          year:'2020',
+          year:'2021',
           planName:'',
           people:{
             uuid: '',
             name:'全部'
           }
         },
+        years: [],
         insuredPeoples:null,
         headNums:null,
         helpList:null,
       }
     },
     created() {
+      let nowYear = new Date().getFullYear();
+      this.searchInfo.year = nowYear;
+      this.years = [];
+      for (let i = nowYear; i >= 2019; i--) {
+        this.years.push(i);
+      }
       this.getMemberHelpData();
       this.getHelpDealList();
       if (!sessionStorage.getItem('myPlanInfo')) {
@@ -379,7 +389,6 @@
 
             }
             .right_cont{
-               width: 250px;
                text-align: right;
               .money_info{
                 line-height: 48px;

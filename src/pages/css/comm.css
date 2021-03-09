@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /*2倍图 3倍图*/
-body, html {
+body,
+html {
   width: 100%;
   height: 100%;
 }
@@ -50,6 +51,10 @@ body, html {
 
 .sina_page .sina_hasbg.channel_default {
   background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner2_2x.png?v=1.0");
+}
+
+.sina_page .sina_hasbg.write_bg {
+  background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner11_2x.png?v=1.0");
 }
 
 .sina_page .sina_bot_ab {
@@ -489,19 +494,23 @@ body, html {
   background-color: #ff8200;
 }
 
-.fadeIn-enter-active, .fadeIn-leave-active {
+.fadeIn-enter-active,
+.fadeIn-leave-active {
   transition: opacity .3s;
 }
 
-.fadeIn-enter, .fadeIn-leave-active {
+.fadeIn-enter,
+.fadeIn-leave-active {
   opacity: 0;
 }
 
-.translate-bottom-enter-active, .translate-bottom-leave-active {
+.translate-bottom-enter-active,
+.translate-bottom-leave-active {
   transition: all 0.3s cubic-bezier(0.36, 0.66, 0.04, 1);
 }
 
-.translate-bottom-enter, .translate-bottom-leave-active {
+.translate-bottom-enter,
+.translate-bottom-leave-active {
   bottom: -10% !important;
   opacity: 0;
 }
@@ -513,6 +522,7 @@ body, html {
   font-size: 34px;
   border: 1px solid #e6e6e6;
   text-align: center;
+  transform: rotateZ(360deg);
 }
 
 .sina_btn.wauto {
@@ -527,6 +537,12 @@ body, html {
 
 .sina_btn.radius {
   border-radius: 42px;
+}
+
+.sina_btn.radius.NewYear {
+  background: linear-gradient(270deg, #FF4469 0%, #FF6546 100%);
+  color: #fff;
+  border: 0;
 }
 
 .sina_btn.radius.primary {
@@ -616,6 +632,10 @@ body, html {
 
 .check_box.bg3.checked::before {
   background-image: url("/static/images/sinaIconChecked4_2x.png");
+}
+
+.check_box.bglx::before {
+  border: 1px solid #ddd;
 }
 
 .check_box.primary::before {

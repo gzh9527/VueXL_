@@ -6,9 +6,11 @@
           <div class="title">{{item.amnt/10000}}万元互助金 （大病互助计划）</div>
           <div class="desc">调整时间 {{item.create_date}}</div>
           <div class="infos">
-            <p>互助金：{{item.amnt/10000}}万元</p>
-            <p>观察期：{{item.valid_date}} 至 {{item.obs_end_date}}</p>
-            <p>生效原因：<span class="col_primary">手动调额</span></p>
+            <p v-if="item.type =='1'">互助金：{{item.adjust_amnt/10000}}万元</p>
+            <p v-if="item.type =='0'">互助金：{{item.amnt/10000}}万元</p>
+            <p v-if="item.type !='2'">观察期：{{item.valid_date}} 至 {{item.obs_end_date}}</p>
+            <p v-if="item.type =='2'">观察期：立即生效</p>
+            <p>生效原因：<span class="col_primary">{{item.reason}}</span></p>
           </div>
         </div>
       </template>
@@ -27,12 +29,17 @@
     data(){
       return{
         editList:null,
+        id:null,
       }
     },
     created(){
-      this.$get(Api.adjustCoverageList).then(ret=>{
+      this.actionCount('pv');
+      this.id= this.$route.query.id;
+      this.$get(Api.adjustCoverageList,{
+        son_policy_no:this.id
+      }).then(ret=>{
         if(ret.code==0){
-          this.editList = ret.data.adjust_list;
+          this.editList = ret.data.list;
         }
       })
     },
@@ -48,6 +55,7 @@
   .sina_page{
     background: #fff;
     position: relative;
+    padding-bottom: 180px;
     .amnt_cells{
       .amnt_cell{
         padding: 42px 40px 46px;

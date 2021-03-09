@@ -4,7 +4,7 @@
     <div class="page_ad" v-else>
       <div :class="titleClass ? titleClass : 'normalTitle'" v-if="title">{{title}}</div>
       <div class="sina_ad_img">
-        <img :src="adInfo.img_url" @click="fnclick">
+        <img :src="adInfo.content" @click="fnclick">
         <div class="sina_ad_btn" @click="closeAd" v-if="hasCloseBtn">
           <i class="close"></i>
         </div>
@@ -61,29 +61,56 @@
             sessionName: 'weibo-insure-plan-10',
           }
         }else {
-          // this.$get(Api.getAdView, {pos: this.id}).then(ret => {
-          //   if (ret.code == 0) {
-          //     if(ret.data){
-          //       let uid = sessionStorage.getItem('weiboInfo') ? JSON.parse(sessionStorage.getItem('weiboInfo'))['uid'] : '';
-          //       ret.data.link = ret.data.link+ uid;
-          //       ret.data['sessionName'] = this.id;
-          //       this.adInfo = ret.data;
-          //     }
-          //   }
-          // })
+          let placeId;
+          switch (this.id) {
+            case 'weibo-insure-plan-1':
+              placeId = '64ea4c9ccab54f8a9e2084e4a02a4832';
+              break;
+            case 'weibo-insure-add-1':
+              placeId = 'a3e4914c6d504480aefa8650ecbc4672';
+              break;
+            case 'weibo-public-list-1':
+              placeId = '01599494c432497382e0bcc3084c59cc';
+              break;
+          }
+          this.$post(Api.getAdvertList, {placeId: placeId}).then(ret => {
+            if (ret&&ret.length>0) {
+              let uid = sessionStorage.getItem('weiboInfo') ? JSON.parse(sessionStorage.getItem('weiboInfo'))['uid'] : '';
+              let adDetail = ret[0];
+              adDetail.url = ret[0].url + uid;
+              adDetail['sessionName'] = this.id;
+              adDetail['adType'] = 'withoutAd';
+              this.adInfo = adDetail;
+              this.advertNum('1');
+            }
+          })
         }
 
       },
-      fnclick(){
+      // 广告图埋点-春博接口
+      advertNum(type,callback){
+        let params = {
+          type:type,
+          advertId:this.adInfo.id,
+          placeId:this.adInfo.placeId
+        };
         if (localStorage.getItem('_userToken')) {
-          this.actionCount('ad_click',this.gotoUrl);
+          this.adActionNum(params,callback);
         } else {
-          this.setActionCount('ad_click', '-1',null,this.gotoUrl); //未授权埋点
+          this.setAdActionNum(params, '-1',callback); //未授权埋点
         }
       },
+      fnclick(){
+        if (localStorage.getItem('_userToken')) {
+          this.actionCount('ad_click');
+        } else {
+          this.setActionCount('ad_click', '-1',null); //未授权埋点
+        }
+        this.advertNum('2',this.gotoUrl)
+      },
       gotoUrl(){
-        if (this.adInfo.link) {
-          window.location.href = this.adInfo.link;
+        if (this.adInfo.url) {
+          window.location.href = this.adInfo.url;
         }
       },
       closeAd(){

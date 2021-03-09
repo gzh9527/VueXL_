@@ -1,7 +1,9 @@
 @import "mixin";
 
-body, html {
+body,
+html {
   width: 100%;
+  //height: auto;
   height: 100%;
 }
 
@@ -29,31 +31,40 @@ body, html {
   .sina_hasbg {
     width: 100%;
     position: relative;
-    &.join_bg{
+
+    &.join_bg {
       background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBannerGive.png?v=1.0");
     }
-    &.channel_nogive{
+
+    &.channel_nogive {
       background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner1_2x.png?v=3.0");
+      //background: url('http://sinahuzhu.oss-cn-beijing.aliyuncs.com/images/sina_publicity_temp/hbLogo.png');
     }
-    &.valent{
+
+    &.valent {
       background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/valent/DBTopbgValent.jpg?v=3.0");
     }
-    &.noValent{
+
+    &.noValent {
       background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/valent/DBTopbgNoValent.jpg?v=3.0");
     }
-    &.channel_default{
+
+    &.channel_default {
       background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner2_2x.png?v=1.0");
     }
-    // &.write_bg{
-    //   background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner11_2x.png?v=1.0");
-    // }
+
+    &.write_bg {
+      background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/DBFormBanner11_2x.png?v=1.0");
+    }
   }
-  .sina_bot_ab{
+
+  .sina_bot_ab {
     width: 100%;
     position: absolute;
     bottom: 0;
     left: 0;
   }
+
   //圆角背景
   .sina_radius_bg {
     background: #fff;
@@ -70,7 +81,8 @@ body, html {
     &.hasback {
       background: #F9F9FC;
     }
-    &.noboxshow{
+
+    &.noboxshow {
       box-shadow: none;
     }
   }
@@ -103,10 +115,12 @@ body, html {
     @include borderRadius(44px);
     border: 1px solid rgba(230, 230, 230, 1);
     margin-bottom: 32px;
-    &.icon{
+
+    &.icon {
       position: relative;
       padding-right: 68px;
-      &.down::after{
+
+      &.down::after {
         content: '';
         @include ct;
         right: 38px;
@@ -116,6 +130,7 @@ body, html {
         background: url("/static/images/sinaIconDown.png") no-repeat;
         background-size: 30px 30px;
       }
+
       .input_css {
         text-align: left;
         border: 0;
@@ -133,64 +148,77 @@ body, html {
     border-bottom: 1px solid #e6e6e6;
     box-sizing: content-box;
     @include fj();
+
     &.has_icon {
       padding-right: 40px;
       background-size: 30px 30px;
       background-position: center right;
+
       .input_css {
         text-align: left;
         font-size: 28px;
       }
     }
+
     .label {
       min-width: 80px;
     }
+
     .input_css {
       text-align: right;
       border: 0;
       flex: 1;
     }
-    &.radius{
+
+    &.radius {
       margin-top: 30px;
-      border-radius:55px;
-      border:1PX solid rgba(230,230,230,1);
+      border-radius: 55px;
+      border: 1PX solid rgba(230, 230, 230, 1);
       padding-left: 40px;
+
       .label {
-        min-width:140px;
+        min-width: 140px;
       }
+
       .input_css {
         margin-right: 40px;
       }
     }
   }
-  .sina_textarea{
-    width:100%;
+
+  .sina_textarea {
+    width: 100%;
     position: relative;
     padding: 16px 20px;
-    background:#fff;
-    border-radius:10px;
+    background: #fff;
+    border-radius: 10px;
     border: 1PX solid #E6E6E6;
     font-size: 22px;
-    &.disabled{
+
+    &.disabled {
       border-color: #fff;
-      background:rgba(245,245,249,1);
-      .counts{
+      background: rgba(245, 245, 249, 1);
+
+      .counts {
         color: #939393;
       }
     }
-    &.hascount{
+
+    &.hascount {
       padding-bottom: 48px;
-      .counts{
+
+      .counts {
         position: absolute;
         right: 16px;
         bottom: 10px;
         font-size: 20px;
       }
     }
-    textarea{
+
+    textarea {
       width: 100%;
       height: 80px;
-      background:transparent;
+      background: transparent;
       border: 0;
     }
   }
@@ -271,15 +299,18 @@ body, html {
       border-left-width: 0;
       transition: transform .3s;
     }
-    &.min::after{
+
+    &.min::after {
       width: 12px;
       height: 12px;
       margin-top: -6px;
       right: 30px;
     }
+
     &.col_fff::after {
       border-color: #fff;
     }
+
     &.right::after {
       transform: rotate(45deg);
     }
@@ -290,17 +321,19 @@ body, html {
   }
 
   //单选
-  .sina_radios{
-    .sina_radio{
+  .sina_radios {
+    .sina_radio {
       line-height: 30px;
       position: relative;
       display: inline-block;
       font-size: 28px;
       padding: 20px 20px 20px 40px;
-      &.active::after{
+
+      &.active::after {
         background: $primary;
       }
-      &:after{
+
+      &:after {
         content: '';
         @include ct;
         left: 0;
@@ -311,6 +344,7 @@ body, html {
       }
     }
   }
+
   //
 
   .join_desc {
@@ -320,7 +354,8 @@ body, html {
     position: relative;
     color: $col_a;
     font-size: 22px;
-    .checkbox{
+
+    .checkbox {
       width: 26px;
       height: 26px;
       display: block;
@@ -330,13 +365,15 @@ body, html {
       border: 1px solid #4ACE98;
       border-radius: 4px;
       background: #fff;
-      &.checked{
-        background :  #4ACE98 url("/static/images/sinaIconChecked3_2x.png") no-repeat center;
+
+      &.checked {
+        background: #4ACE98 url("/static/images/sinaIconChecked3_2x.png") no-repeat center;
         background-size: 18px 18px;
 
       }
     }
   }
+
   .page_bot {
     margin-top: 48px;
     background: #fff;
@@ -376,13 +413,16 @@ body, html {
   .flex1 {
     @include flex(1)
   }
-  .fr{
+
+  .fr {
     float: right;
   }
-  .textr{
+
+  .textr {
     text-align: right;
 
   }
+
   .blod {
     font-weight: 600;
   }
@@ -416,17 +456,20 @@ body, html {
       }
     }
   }
+
   //tab选项卡--公示和分摊
-  .plan_types{
+  .plan_types {
     color: #939393;
     background: #fff;
     font-size: 28px;
     display: flex;
     text-align: center;
-    .plan_type{
+
+    .plan_type {
       position: relative;
       padding: 30px 0;
       flex: 1;
+
       &:after {
         content: "";
         @include cl;
@@ -436,9 +479,11 @@ body, html {
         background-color: transparent;
         transition: all .3s;
       }
+
       &.active {
         font-weight: bold;
         color: $primary;
+
         &:after {
           width: 50px;
           background-color: $primary;
@@ -450,19 +495,27 @@ body, html {
 
 
 //  动画效果
-.fadeIn-enter-active, .fadeIn-leave-active{
+.fadeIn-enter-active,
+.fadeIn-leave-active {
   transition: opacity .3s;
 }
-.fadeIn-enter, .fadeIn-leave-active{
+
+.fadeIn-enter,
+.fadeIn-leave-active {
   opacity: 0;
 }
-.translate-bottom-enter-active, .translate-bottom-leave-active{
-  transition: all 0.3s cubic-bezier(.36,.66,.04,1);
+
+.translate-bottom-enter-active,
+.translate-bottom-leave-active {
+  transition: all 0.3s cubic-bezier(.36, .66, .04, 1);
 }
-.translate-bottom-enter, .translate-bottom-leave-active{
+
+.translate-bottom-enter,
+.translate-bottom-leave-active {
   bottom: -10% !important;
   opacity: 0;
 }
+
 //按钮
 .sina_btn {
   width: 100%;
@@ -471,8 +524,9 @@ body, html {
   font-size: $font34;
   border: 1px solid #e6e6e6;
   text-align: center;
+  transform: rotateZ(360deg);
 
-  &.wauto{
+  &.wauto {
     width: auto;
     min-width: 220px;
     padding: 0 20px;
@@ -484,16 +538,26 @@ body, html {
 
   &.radius {
     border-radius: 42px;
+
+    &.NewYear {
+
+      background: linear-gradient(270deg, #FF4469 0%, #FF6546 100%);
+      color: #fff;
+      border: 0;
+    }
+
     &.primary {
       background: linear-gradient(270deg, rgba(255, 188, 51, 1) 0%, rgba(255, 130, 0, 1) 100%);
       color: #fff;
       border: 0;
     }
+
     &.grey {
       background-image: linear-gradient(90deg, #857E77 0%, #B3ADA0 100%);
       color: #fff;
       border: 0;
     }
+
     &.default {
       background: #fff;
       color: #939393;
@@ -502,18 +566,20 @@ body, html {
 
     &.line {
       &.primary {
-        border:1PX solid $primary;
+        border: 1PX solid $primary;
         background: #fff;
         color: $primary;
       }
+
       &.white {
         border-color: white;
         background: $primary;
         color: white;
-        box-shadow:0px 7px 24px 0px rgba(223,61,1,0.5);
+        box-shadow: 0px 7px 24px 0px rgba(223, 61, 1, 0.5);
       }
     }
   }
+
   &.medium {
     width: 220px;
     height: 68px;
@@ -522,7 +588,8 @@ body, html {
     font-size: $font28;
     display: inline-block;
   }
-  &.max{
+
+  &.max {
     height: 100px;
     line-height: 100px;
     border-radius: 50px;
@@ -537,7 +604,9 @@ body, html {
   position: relative;
   margin: 0 auto;
   padding-left: 40px;
-  &::before,&.checked::before {
+
+  &::before,
+  &.checked::before {
     content: '';
     width: 26px;
     height: 26px;
@@ -551,66 +620,79 @@ body, html {
     overflow: hidden;
   }
 
-  &.checked::before{
+  &.checked::before {
     background-size: 18px 18px;
     background-position: center;
     background-image: url("/static/images/sinaIconChecked1_2x.png");
     background-color: #fff;
     background-repeat: no-repeat;
   }
-  &.bg1::before{
+
+  &.bg1::before {
     border: 1px solid #fff;
   }
-  &.bg2.checked::before{
+
+  &.bg2.checked::before {
     background-image: url("/static/images/sinaIconChecked2_2x.png");
     background-color: #fff;
   }
-  &.bg3.checked::before{
+
+  &.bg3.checked::before {
     background-image: url("/static/images/sinaIconChecked4_2x.png");
   }
-  &.primary{
+  &.bglx::before {
+    border: 1px solid #ddd;
+  }
+  &.primary {
     &::before {
       border-color: #4ACE98;
     }
+
     &.checked::before {
       background-color: #4ACE98;
     }
   }
 
 }
+
 //受助类型弹框
-.sinaalertbox{
-  .help_type{
+.sinaalertbox {
+  .help_type {
     display: flex;
-    height:64px;
+    height: 64px;
     font-size: 24px;
     color: #fff;
     line-height: 64px;
     margin-bottom: 36px;
     margin-top: 40px;
-    &:first-child{
+
+    &:first-child {
       margin-top: 0;
     }
-    .help_type_name{
+
+    .help_type_name {
       padding: 0 30px;
-      background:rgba(255,130,0,1);
-      border-radius:32px 0px 0px 32px;
+      background: rgba(255, 130, 0, 1);
+      border-radius: 32px 0px 0px 32px;
       margin-right: 10px;
     }
-    .help_type_desc{
+
+    .help_type_desc {
       flex: 1;
       padding: 0 30px;
-      background:rgba(255,184,111,1);
-      border-radius:0 32px 32px 0px;
+      background: rgba(255, 184, 111, 1);
+      border-radius: 0 32px 32px 0px;
     }
   }
-  .help_type_info{
+
+  .help_type_info {
     color: #FF8200;
     text-align: center;
     padding-top: 30px;
   }
 
 }
+
 .toast-mask {
   position: fixed;
   left: 0;
@@ -633,21 +715,25 @@ body, html {
 .col_grey {
   color: $grey
 }
-.col_ffb93c{
+
+.col_ffb93c {
   color: #FFB93C;
 }
-.col_red{
+
+.col_red {
   color: #c82a29;
 }
+
 // 弹窗中样式
-.alert_note_info{
+.alert_note_info {
   margin-top: 26px;
   padding: 24px 30px;
   font-size: 22px;
-  background:rgba(245,245,249,1);
-  border-radius:25px;
+  background: rgba(245, 245, 249, 1);
+  border-radius: 25px;
 }
-.exit_redPacketBg{
+
+.exit_redPacketBg {
   width: 470px;
   height: 250px;
   background: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/exitRedpacketbg1.png?v=2") no-repeat;
@@ -657,20 +743,24 @@ body, html {
   line-height: 136px;
   padding-top: 24px;
   text-align: center;
-  .money{
+
+  .money {
     font-size: 86px;
   }
-  &.bg2{
+
+  &.bg2 {
     background-image: url("http://bihu-oss.oss-cn-beijing.aliyuncs.com/images/sina_weibo/exitRedpacketbg2.png?v=2");
   }
 }
 
-.exit-infos{
+.exit-infos {
   background: #fff;
   padding: 47px 36px 0 40px;
   font-size: 26px;
+
   .exit_txt_tips {
     line-height: 40px;
+
     i {
       background: $primary;
       color: #fff;
@@ -682,36 +772,47 @@ body, html {
       padding: 0 12px;
     }
   }
-  .exit_now{
+
+  .exit_now {
     padding: 24px 0 44px;
   }
-  .exit_cells{
+
+  .exit_cells {
     font-size: 28px;
     padding: 0 20px;
     font-weight: bold;
-    .exit_cell{
+
+    .exit_cell {
       padding-left: 52px;
       background: url("/static/images/exitIcon_2x.png") no-repeat left center;
       background-size: 34px 34px;
       margin-top: 18px;
       line-height: 40px;
-      &:first-child{
+
+      &:first-child {
         margin-top: 0;
       }
     }
   }
-  .footer_btns{
+
+  .footer_btns {
     padding: 70px 10px 86px;
     background: #fff;
-    .sina_btn{margin-right: 30px;}
+
+    .sina_btn {
+      margin-right: 30px;
+    }
   }
 }
-.alert_ul{
+
+.alert_ul {
   padding-top: 30px;
-  .alert_li{
+
+  .alert_li {
     padding-left: 36px;
     position: relative;
-    &::before{
+
+    &::before {
       content: '';
       position: absolute;
       top: 12px;
@@ -720,17 +821,20 @@ body, html {
       height: 10px;
       background: $primary;
     }
+
     padding-bottom: 30px;
-    &:last-child{
+
+    &:last-child {
       padding-bottom: 0;
     }
   }
-  &.edit_amnt{
+
+  &.edit_amnt {
     font-size: 22px;
-    .alert_li::before{
-      background-color:#B7B6B6;
+
+    .alert_li::before {
+      background-color: #B7B6B6;
       border-radius: 50%;
     }
   }
 }
-

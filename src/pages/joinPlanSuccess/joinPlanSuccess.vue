@@ -1,17 +1,36 @@
 <template>
   <div class="bg_box">
     <div class="wrapper">
+      <!-- <xtjToast :sendData="typePage" /> -->
       <div class="wraper_box">
-        <h6>
-          <img src="../images/icon_ok.png" /> 加入成功
-        </h6>
+        <h6><img src="../images/icon_ok.png" /> 加入成功</h6>
         <h5>您的家庭保障评测</h5>
         <div class="cont_match">
-          <img v-show="isCountMatch=='60branch'" src="../images/image_60.png" alt />
-          <img v-show="isCountMatch=='70branch'" src="../images/image_70.png" alt />
-          <img v-show="isCountMatch=='80branch'" src="../images/image_80.png" alt />
-          <img v-show="isCountMatch=='90branch'" src="../images/image_90.png" alt />
-          <img v-show="isCountMatch=='100branch'" src="../images/image_100.png" alt />
+          <img
+            v-show="isCountMatch == '60branch'"
+            src="../images/image_60.png"
+            alt
+          />
+          <img
+            v-show="isCountMatch == '70branch'"
+            src="../images/image_70.png"
+            alt
+          />
+          <img
+            v-show="isCountMatch == '80branch'"
+            src="../images/image_80.png"
+            alt
+          />
+          <img
+            v-show="isCountMatch == '90branch'"
+            src="../images/image_90.png"
+            alt
+          />
+          <img
+            v-show="isCountMatch == '100branch'"
+            src="../images/image_100.png"
+            alt
+          />
         </div>
       </div>
       <div class="content_from">
@@ -21,17 +40,30 @@
           <div class="from_son">
             <span>关系：</span>
             <div class="piker">
-              <span @click="openPicker()">{{switch_name}}</span>
+              <span @click="openPicker()">{{ switch_name }}</span>
               <img @click="openPicker()" src="../images/downL.png" alt />
             </div>
           </div>
           <div class="from_son">
             <span>真实姓名：</span>
-            <input v-model.trim="userName" autocomplete="off" type="text" maxlength="10" placeholder="请输入家人真实姓名" />
+            <input
+              v-model.trim="userName"
+              autocomplete="off"
+              type="text"
+              maxlength="10"
+              placeholder="请输入家人真实姓名"
+            />
           </div>
           <div class="from_son">
             <span>身份证号：</span>
-            <input v-model.trim="idCard" autocomplete="off" type="text" maxlength="18" name placeholder="申请互助金唯一凭证 严格保密" />
+            <input
+              v-model.trim="idCard"
+              autocomplete="off"
+              type="text"
+              maxlength="18"
+              name
+              placeholder="申请互助金唯一凭证 严格保密"
+            />
           </div>
         </div>
         <div class="content_fot">
@@ -52,9 +84,14 @@
 
 <script>
 import Api from "../../utils/apiConfig";
+//引入 享投君
+import xtjToast from "../../components/xtjToast/xtjToast";
 import { checkPhone, isChn, isIdNumber } from "../../assets/js/common";
 export default {
-  name: "joinPlanSuccess",
+  name: "paySuc",
+  components: {
+    xtjToast,
+  },
   data() {
     return {
       isCountMatch: "60branch",
@@ -67,23 +104,50 @@ export default {
       workTypeIndex: 0,
       relation: 53,
       myPlanInfo: null,
+      typePage: "sucPage",
     };
   },
   created() {},
   mounted() {
+    this.typePage = "sucPage";
     sessionStorage.removeItem("myPlanInfo");
     sessionStorage.removeItem("_planisOver");
     sessionStorage.removeItem("_planState");
+    let channel = window.localStorage.getItem("channel");
+    // 成功页||成功挽留页埋点
+    if (
+      localStorage.getItem("_AgainActive") ||
+      localStorage.getItem("_ActiveChannel")
+    ) {
+      //借钱渠道
+      if (channel == "55001") {
+        this.actionCount("borrowPv1");
+      } else {
+        //本人加入放弃支付授权再次激活 埋点
+        this.actionCount("pv1");
+      }
+    } else {
+      //借钱渠道
+      if (channel == "55001") {
+        this.actionCount("borrowPv");
+      } else {
+        this.actionCount("pv");
+      }
+    }
     history.pushState(null, null, document.URL);
     window.addEventListener("popstate", function () {
       history.pushState(null, null, document.URL);
     });
-    if (this.$route.query.type) {
-      this.paySign();
-    } else {
-      this.getPlanStatus();
+    console.log(this.$route.query.type);
+    this.sinaActive();
+    this.getPlanStatus();
+    //发微博
+    if (localStorage.getItem("_sendNotice")) {
+      this.sendSinaEvent();
     }
-    this.activeInfoShow = localStorage.getItem("channel") && localStorage.getItem("channel").toString().substring(0, 2) == "39";
+    this.activeInfoShow =
+      localStorage.getItem("channel") &&
+      localStorage.getItem("channel").toString().substring(0, 2) == "39";
     //家人列表
     this.$get(Api.getPolicyList, {}).then((res) => {
       console.log(res);
@@ -124,17 +188,7 @@ export default {
               ret.data.plan_list_state["XL002"] == "activated")
           ) {
             this.addFYPlan();
-            if (
-              localStorage.getItem("_AgainActive") ||
-              localStorage.getItem("_ActiveChannel")
-            ) {
-              //本人加入放弃支付授权再次激活
-              this.actionCount("pv1");
-            } else {
-              this.actionCount("pv");
-            }
           } else {
-            this.sinaActive();
           }
         } else {
           this.$toast("请求失败，请刷新重试");
@@ -142,17 +196,9 @@ export default {
       });
     },
     sinaActive() {
-      let tranNo = this.$route.query.tran_no;
-      if (!tranNo) {
-        this.$toast("请求失败，请刷新重试");
-        this.isShow = true;
-        this.isActive = false;
-        return;
-      }
-      this.$post(Api.activationPolicy, { tran_no: tranNo }).then((ret) => {
+      this.$post(Api.activationPolicy, { tran_no: "aaa" }).then((ret) => {
         if (ret.code === 0) {
           this.addFYPlan();
-          this.actionCount("pv");
         } else {
           this.isShow = true;
           this.isActive = false;
@@ -179,28 +225,7 @@ export default {
         }
       });
     },
-    jumpUrl(type) {
-      if (
-        this.sendchecked &&
-        this.isActive &&
-        !localStorage.getItem("_sendNotice")
-      ) {
-        this.sendSinaEvent();
-      }
-      localStorage.removeItem("_sendNotice");
-      let url = "/weibo/insure-plan";
-      let action = "center_click";
-      if (type && type == "add") {
-        action = "add";
-        url = "/weibo/insure-add";
-      } else if (type && type == "share") {
-        action = "share_click";
-        url = "/weibo/activity-valent?channel=30056";
-      }
-      this.actionCount(action, () => {
-        this.$router.replace(url);
-      });
-    },
+    //发微博
     sendSinaEvent() {
       this.$post(Api.sendJoinNotice, { plan_code: "XL001" });
       this.actionCount("send_click");
@@ -221,6 +246,7 @@ export default {
                 mobile: item.mobile || "",
                 plan_code: "XL003",
                 channel: "810028",
+                amount: 0,
               }).then((ret) => {});
             }
           } else {
@@ -301,6 +327,7 @@ export default {
             this.$route.query.channel ||
             localStorage.getItem("channel") ||
             "10000",
+          amount: 0,
         }).then((ret) => {
           if (ret.code === 0) {
             sessionStorage.removeItem("myPlanInfo");
@@ -341,7 +368,8 @@ export default {
 .bg_box {
   width: 100%;
   height: auto;
-  background: url("../images/successBg.png") 100% no-repeat;
+  background: url("http://sinahuzhu.oss-cn-beijing.aliyuncs.com/images/sina_publicity_temp/successBg.png")
+    100% no-repeat;
   background-size: cover;
   padding-bottom: 150px;
   background-position: start;

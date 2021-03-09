@@ -73,6 +73,7 @@ function getHeader() {
   if (userToken) {
     axios.defaults.headers.Authorization = userToken;
   }
+  sessionStorage.getItem('_openId') ? axios.defaults.headers['openid'] = sessionStorage.getItem('_openId') : null ;
 }
 
 export const POST = (url, params,token) => {
@@ -120,4 +121,3 @@ export const JSONP = (url, params) => {
   delete axios.defaults.headers.Authorization
   return axios.jsonp(`${url}`, {data: params}).then(res => res)
 }
-

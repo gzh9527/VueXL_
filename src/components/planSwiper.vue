@@ -139,6 +139,7 @@
                 if (!this.myPlanInfo) {
                     return;
                 }
+                this.actionCount('nowActivation')
                 this.$router.push('/weibo/insure-active?planCode='+code)
             },
             checkDetail(id,state) {
@@ -149,8 +150,14 @@
             addFrimly(index) {
               if (this.myPlanInfo.planStatus == 1 || this.myPlanInfo.planStatusFY == 1) {
                 this.actionCount('addFrimly_click' + index, () => {
-                  this.$router.push('/weibo/insure-add')
+                  let channel = '50006';
+                  if (index == '2') {
+                    channel = '50007';
+                  }
+                  this.$router.push('/weibo/insure-add?channel=' + channel)
                 });
+              }else{
+                this.$toast('您需先激活权益')
               }
             },
             addPlanAlert(item) {

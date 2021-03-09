@@ -174,7 +174,8 @@
             relation: addPerson.relatype, //关系
             mobile: addPerson.mobile || '',
             plan_code: 'XL001',
-            channel: channel
+            channel: channel,
+            amount: 0,
           }).then(ret => {
             if (ret.code === 0) {
               sessionStorage.removeItem('myPlanInfo');

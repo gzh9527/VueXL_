@@ -47,11 +47,13 @@ export const mixinActions = {
         }
       })
     },
-    getSinaUid(action,callpack) {
+    getSinaUid(action,callpack,type) {
       this.$get(Api.getweiboInfo, {isNotshowLoad:'noshow'}).then(res => {
         if (res.code == 0) {
           let weiboInfo = res.data.user;
-          this.setActionCount(action, weiboInfo.uid,null,callpack);
+          type && type == 'ad' ?
+            this.setAdActionCount(action, weiboInfo.uid, callpack) :
+            this.setActionCount(action, weiboInfo.uid, null, callpack);
           sessionStorage.setItem('weiboInfo', JSON.stringify(weiboInfo))
         } else {
           this.$toast(res.msg || "请求超时，请刷新重试");
@@ -59,6 +61,26 @@ export const mixinActions = {
       })
 
     },
+    adActionNum(params,callback) {
+      let userInfo = sessionStorage.getItem('weiboInfo')
+      if (userInfo) {
+        this.setAdActionNum(params, JSON.parse(userInfo).uid || 0,callback);
+      } else {
+        this.getSinaUid(params,callback,'ad');
+      }
+    },
+
+    setAdActionNum(params,uid,callback){
+      params['uuid'] = uid;
+      let arr = [];
+      arr.push(params)
+      this.$post(Api.setAdvertTotalNum,arr).then(ret=>{
+        if(callback &&typeof callback=== 'function'){
+          callback();
+        }
+      })
+    },
+
     getUrlKey(name){
       return decodeURIComponent((new RegExp('[?|&]'+name+'='+'([^&;]+?)(&|#|;|$)').exec(location.href)||[,""])[1].replace(/\+/g,'%20'))||null;
     },

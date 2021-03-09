@@ -15,6 +15,8 @@ import sinaAlert from './components/sinaAlert'
 import VueLazyload from 'vue-lazyload'
 import MintUI from 'mint-ui'
 import '../src/pages/css/mint.css'
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
 Vue.use(MintUI)
 /*使用VueResource插件*/
 Vue.use(VueResource);
@@ -24,16 +26,16 @@ Vue.use(sinaAlert);
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   attempt: 1,
-  listenEvents: [ 'scroll' ]
+  listenEvents: ['scroll']
 });
 //全局混入
-import {mixinActions} from './assets/js/mixinActions'
+import { mixinActions } from './assets/js/mixinActions'
 Vue.mixin(mixinActions);
-// //vconsole
+//vconsole
 // import Vconsole from 'vconsole';
 // let vConsole = new Vconsole();
 // Vue.use(vConsole)
-import {POST, GET,GETBYJSON, PUT, DELETE,JSONP} from './utils/index'
+import { POST, GET, GETBYJSON, PUT, DELETE, JSONP } from './utils/index'
 //定义全局变量
 Vue.prototype.$post = POST;
 Vue.prototype.$get = GET;
@@ -44,6 +46,6 @@ Vue.prototype.$jsonp = JSONP;
 new Vue({
   el: '#app',
   router,
-  components: {App},
+  components: { App },
   template: '<App/>'
 })

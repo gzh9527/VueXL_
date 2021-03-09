@@ -62,7 +62,12 @@
           url = '/weibo/amnt-list';
         }
         this.actionCount(action + this.actionName,()=>{
-          this.$router.replace(url)
+          if(url == '/weibo/amnt-list'){
+            this.$router.replace({path: '/weibo/amnt-list', query: this.$route.query})
+          }else{
+            this.$router.replace(url)
+          }
+
         })
       },
     }
